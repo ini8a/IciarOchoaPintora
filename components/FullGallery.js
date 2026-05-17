@@ -160,7 +160,9 @@ export default function FullGallery() {
               fontFamily: 'var(--font-serif)',
               fontSize: '12px',
               fontStyle: 'italic',
-              color: 'rgba(242,239,233,0.85)',
+              color: '#2D2D2D',
+              background: 'rgba(242,239,233,0.78)',
+              padding: '2px 8px',
             }}>
               {item.title}
             </span>

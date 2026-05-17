@@ -24,14 +24,22 @@ html {
 
 body {
   background-color: #F2EFE9;
-  background-image: url('/images/Low_res_lino_back.jpg');
-  background-repeat: repeat;
-  background-size: auto;
-  background-attachment: fixed;
   color: #2D2D2D;
   font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Fixed linen background — works on iOS Safari unlike background-attachment: fixed */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #F2EFE9;
+  background-image: url('/images/Low_res_lino_back.jpg');
+  background-repeat: repeat;
+  background-size: auto;
 }
 
 /* ── Mobile overrides — only apply below 768px ─────────────────── */

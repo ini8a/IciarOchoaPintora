@@ -18,6 +18,7 @@ const raleway = Raleway({
 export const metadata = {
   title: 'Iciar Ochoa — Artista',
   description: 'Pintora especializada en acuarela, Iciar Ochoa captura la luz y la atmósfera del Mediterráneo.',
+  icons: { icon: '/images/logo_transparente.png' },
 };
 
 export default function RootLayout({ children }) {
