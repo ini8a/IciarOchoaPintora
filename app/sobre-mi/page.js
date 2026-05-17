@@ -58,7 +58,7 @@ export default function SobreMiPage() {
   return (
     <>
       <Nav />
-      <main style={{
+      <main className="m-sm-grid" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: 'auto auto',
@@ -132,7 +132,7 @@ export default function SobreMiPage() {
         </div>
 
         {/* BOTTOM-LEFT — Portrait image */}
-        <div style={{
+        <div className="m-sm-portrait" style={{
           position: 'relative',
           overflow: 'hidden',
           minHeight: '60vh',

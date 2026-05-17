@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ export default function Hero() {
   const sectionRef = useRef(null);
   const imageRef   = useRef(null);
   const [hintHidden, setHintHidden] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -75,20 +77,22 @@ export default function Hero() {
         backgroundPosition: 'center',
       }}
     >
-      {/* Gradient veil — dense left for legibility, fades right */}
+      {/* Gradient veil */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to right, rgba(242,239,233,0.92) 0%, rgba(242,239,233,0.78) 42%, rgba(242,239,233,0.18) 100%)',
+          background: isMobile
+            ? 'rgba(242,239,233,0.80)'
+            : 'linear-gradient(to right, rgba(242,239,233,0.92) 0%, rgba(242,239,233,0.78) 42%, rgba(242,239,233,0.18) 100%)',
         }}
       />
 
-      {/* Left — text. CSS animation instead of GSAP so it never conflicts with scroll tweens. */}
+      {/* Left — text */}
       <div
         className="relative z-10 flex flex-col justify-center"
         style={{
-          width: '52%',
-          padding: '100px 56px 60px 72px',
+          width: isMobile ? '100%' : '52%',
+          padding: isMobile ? '88px 28px 48px' : '100px 56px 60px 72px',
           animation: 'heroTextIn 1s cubic-bezier(0.22,1,0.36,1) both 0.25s',
         }}
       >
@@ -139,8 +143,8 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Right — portrait */}
-      <div
+      {/* Right — portrait (desktop only) */}
+      {!isMobile && <div
         className="relative z-10 overflow-hidden"
         style={{ width: '48%', height: '100%' }}
       >
@@ -155,7 +159,7 @@ export default function Hero() {
           className="absolute inset-y-0 left-0 pointer-events-none"
           style={{ width: '160px', background: 'linear-gradient(to right, rgba(242,239,233,0.78), transparent)' }}
         />
-      </div>
+      </div>}
 
       {/* Circular EXPLORAR button — centered at bottom */}
       <button

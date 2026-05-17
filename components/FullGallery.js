@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GALERIA } from '@/data/galeria';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ const ASPECT_RATIO = {
 export default function FullGallery() {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -98,7 +100,7 @@ export default function FullGallery() {
       <div
         ref={trackRef}
         style={{
-          columns: 4,
+          columns: isMobile ? 2 : 4,
           columnGap: '10px',
           padding: '10px',
           willChange: 'transform',
@@ -135,7 +137,7 @@ export default function FullGallery() {
                 src={item.thumbnail}
                 alt={item.title}
                 fill
-                sizes="25vw"
+                sizes={isMobile ? '50vw' : '25vw'}
                 style={{ objectFit: 'cover' }}
               />
             )}

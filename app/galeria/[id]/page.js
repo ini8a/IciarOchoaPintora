@@ -31,14 +31,14 @@ export default async function GaleriaArtworkPage({ params }) {
       <main style={{ paddingTop: '84px' }}>
 
         {/* ── Single viewport split ───────────────────── */}
-        <div style={{
+        <div className="m-art-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           height: 'calc(100vh - 84px)',
         }}>
 
           {/* Left — main image, fills height */}
-          <div style={{
+          <div className="m-art-img" style={{
             background: color,
             overflow: 'hidden',
             position: 'relative',
@@ -68,7 +68,7 @@ export default async function GaleriaArtworkPage({ params }) {
           </div>
 
           {/* Right — info panel, exact viewport height, no scroll */}
-          <div style={{
+          <div className="m-art-info" style={{
             height: '100%',
             overflow: 'hidden',
             padding: '40px 56px 40px 52px',
@@ -77,7 +77,7 @@ export default async function GaleriaArtworkPage({ params }) {
           }}>
 
             {/* Beige box — fills full height, contains everything */}
-            <div style={{
+            <div className="m-art-box" style={{
               background: '#E8E2D9',
               padding: '28px 36px',
               display: 'flex',

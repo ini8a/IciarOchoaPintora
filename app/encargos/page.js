@@ -42,7 +42,7 @@ export default function EncargosPage() {
 
       <Nav />
 
-      <main style={{
+      <main className="m-enc-main" style={{
         height: '100vh',
         overflow: 'hidden',
         display: 'flex',
@@ -60,7 +60,7 @@ export default function EncargosPage() {
           gap: '32px',
           padding: '24px 56px',
           flex: 1,
-        }}>
+        }} className="m-enc-strip">
 
           {/* Left text */}
           <div style={{ background: '#D4CCBE', padding: '32px 36px' }}>
@@ -136,7 +136,7 @@ export default function EncargosPage() {
         </div>
 
         {/* Bottom scrolling row — takes all remaining height */}
-        <div style={{ overflow: 'hidden', flex: 1, minHeight: 0 }}>
+        <div className="m-enc-marquee" style={{ overflow: 'hidden', flex: 1, minHeight: 0 }}>
           <div className="marquee-track">
             {[0, 1].map(setIdx => (
               <div key={setIdx} className="marquee-set">

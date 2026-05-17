@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Nav({ transparent = false }) {
   const [visible, setVisible]     = useState(!transparent);
   const [menuOpen, setMenuOpen]   = useState(false);
   const [logoHover, setLogoHover] = useState(false);
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!transparent) return;
@@ -89,24 +91,27 @@ export default function Nav({ transparent = false }) {
           left: 0,
           right: 0,
           zIndex: 200,
-          display: 'grid',
-          gridTemplateColumns: '1fr auto 1fr',
+          display: isMobile ? 'flex' : 'grid',
+          gridTemplateColumns: isMobile ? undefined : '1fr auto 1fr',
+          flexDirection: isMobile ? 'column' : undefined,
           alignItems: 'center',
-          padding: '20px 56px',
+          padding: isMobile ? '8px 20px' : '20px 56px',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateY(0)' : 'translateY(-10px)',
           transition: 'opacity 0.5s ease, transform 0.5s ease',
         }}
       >
-        {/* Left links */}
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-          <div style={slide('left', 60)}>
-            <Link href="/#oportunidades" style={linkStyle}>Obras</Link>
+        {/* Desktop left links */}
+        {!isMobile && (
+          <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+            <div style={slide('left', 60)}>
+              <Link href="/#oportunidades" style={linkStyle}>Obras</Link>
+            </div>
+            <div style={slide('left', 0)}>
+              <Link href="/encargos" style={linkStyle}>Encargos</Link>
+            </div>
           </div>
-          <div style={slide('left', 0)}>
-            <Link href="/encargos" style={linkStyle}>Encargos</Link>
-          </div>
-        </div>
+        )}
 
         {/* Centre — logo button */}
         <button
@@ -133,13 +138,12 @@ export default function Nav({ transparent = false }) {
               src="/images/logo_transparente.png"
               alt="Logo Iciar Ochoa"
               style={{
-                height: '88px',
+                height: isMobile ? '60px' : '88px',
                 width: 'auto',
                 display: 'block',
                 transform: menuOpen && logoHover ? 'scale(1.04)' : menuOpen ? 'scale(1.06)' : 'scale(1)',
               }}
             />
-            {/* Blur overlay — only visible when menu is open and hovering */}
             {menuOpen && (
               <div className="logo-overlay">
                 <span>Inicio</span>
@@ -148,15 +152,43 @@ export default function Nav({ transparent = false }) {
           </div>
         </button>
 
-        {/* Right links */}
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <div style={slide('right', 0)}>
-            <Link href="/sobre-mi" style={linkStyle}>Sobre mí</Link>
+        {/* Desktop right links */}
+        {!isMobile && (
+          <div style={{ display: 'flex', gap: '32px', alignItems: 'center', justifyContent: 'flex-end' }}>
+            <div style={slide('right', 0)}>
+              <Link href="/sobre-mi" style={linkStyle}>Sobre mí</Link>
+            </div>
+            <div style={slide('right', 60)}>
+              <Link href="/contacto" style={linkStyle}>Contacto</Link>
+            </div>
           </div>
-          <div style={slide('right', 60)}>
-            <Link href="/contacto" style={linkStyle}>Contacto</Link>
+        )}
+
+        {/* Mobile menu — slides down below logo */}
+        {isMobile && (
+          <div style={{
+            overflow: 'hidden',
+            maxHeight: menuOpen ? '60px' : 0,
+            opacity: menuOpen ? 1 : 0,
+            transition: 'max-height 0.4s ease, opacity 0.3s ease',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '8px',
+            justifyContent: 'center',
+            paddingBottom: menuOpen ? '8px' : 0,
+          }}>
+            {[
+              { href: '/#oportunidades', label: 'Obras' },
+              { href: '/encargos',       label: 'Encargos' },
+              { href: '/sobre-mi',       label: 'Sobre mí' },
+              { href: '/contacto',       label: 'Contacto' },
+            ].map(({ href, label }) => (
+              <Link key={label} href={href} style={linkStyle} onClick={() => setMenuOpen(false)}>
+                {label}
+              </Link>
+            ))}
           </div>
-        </div>
+        )}
       </nav>
     </>
   );

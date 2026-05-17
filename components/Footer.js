@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{
+    <footer className="m-footer" style={{
       background: '#2D2D2D',
       padding: '56px 72px 40px',
       display: 'grid',
@@ -72,7 +72,7 @@ export default function Footer() {
       </div>
 
       {/* Right — contact */}
-      <div style={{ textAlign: 'right' }}>
+      <div className="m-footer-right" style={{ textAlign: 'right' }}>
         <span style={labelStyle}>Contacto</span>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px', alignItems: 'flex-end' }}>
           <a href="mailto:iciarochoa@gmail.com" style={contactLinkStyle}>

@@ -3,6 +3,7 @@
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function CopyButton({ label, value, href, callHref }) {
   const [copied, setCopied] = useState(false);
@@ -50,6 +51,7 @@ function CopyButton({ label, value, href, callHref }) {
 }
 
 export default function ContactoPage() {
+  const isMobile = useIsMobile();
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ nombre: '', telefono: '', email: '', mensaje: '' });
 
@@ -61,7 +63,7 @@ export default function ContactoPage() {
   return (
     <>
       <Nav />
-      <main style={{
+      <main className="m-contacto-main" style={{
         height: '100vh',
         overflow: 'hidden',
         display: 'grid',
@@ -70,7 +72,7 @@ export default function ContactoPage() {
       }}>
 
         {/* LEFT */}
-        <div style={{
+        <div className="m-contacto-left" style={{
           padding: '48px 56px',
           display: 'flex',
           flexDirection: 'column',
@@ -136,7 +138,7 @@ export default function ContactoPage() {
         </div>
 
         {/* RIGHT — form */}
-        <div style={{
+        <div className="m-contacto-right" style={{
           padding: '48px 56px',
           display: 'flex',
           flexDirection: 'column',

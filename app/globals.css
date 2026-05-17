@@ -33,3 +33,33 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+/* ── Mobile overrides — only apply below 768px ─────────────────── */
+/* All desktop inline styles are untouched. !important is used      */
+/* specifically to override inline styles on mobile only.           */
+@media (max-width: 768px) {
+
+  /* Artwork detail pages (galeria/[id], oportunidades/[id]) */
+  .m-art-grid  { grid-template-columns: 1fr !important; height: auto !important; }
+  .m-art-img   { height: 55vw !important; max-height: 60vh !important; min-height: 220px !important; }
+  .m-art-info  { height: auto !important; overflow: visible !important; padding: 16px 16px 32px !important; }
+  .m-art-box   { flex: none !important; min-height: auto !important; padding: 20px 20px 28px !important; }
+
+  /* sobre-mi */
+  .m-sm-grid      { grid-template-columns: 1fr !important; padding-top: 72px !important; }
+  .m-sm-portrait  { min-height: 50vh !important; }
+
+  /* encargos */
+  .m-enc-main    { height: auto !important; overflow: visible !important; padding-top: 72px !important; gap: 0 !important; }
+  .m-enc-strip   { grid-template-columns: 1fr !important; padding: 20px 20px !important; gap: 16px !important; }
+  .m-enc-marquee { flex: none !important; height: 45vw !important; min-height: 180px !important; max-height: 300px !important; }
+
+  /* contacto */
+  .m-contacto-main { height: auto !important; overflow: visible !important; grid-template-columns: 1fr !important; padding-top: 72px !important; }
+  .m-contacto-left { border-right: none !important; border-bottom: 1px solid #D1CDC4 !important; padding: 32px 20px !important; }
+  .m-contacto-right { padding: 32px 20px !important; }
+
+  /* footer */
+  .m-footer      { padding: 40px 24px 32px !important; grid-template-columns: 1fr !important; gap: 28px !important; }
+  .m-footer-right { text-align: left !important; }
+}
