@@ -63,7 +63,7 @@ export default function FullGallery() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
